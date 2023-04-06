@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Button, Modal } from 'protailwind-ui-components'
+import { Button, Modal } from '@protailwind/ui-dev'
 
 function App() {
   const [isOpen, setIsOpen] = React.useState(false)
