@@ -18,11 +18,7 @@ function App() {
     <div className="mx-auto mt-20 max-w-2xl px-4">
       <h1 className="text-xl font-medium">Pro Tailwind UI Components</h1>
       <p className="mt-2 text-lg/7 text-slate-700">
-        The following `Button` and `Modal` components come from the{' '}
-        <code className="rounded bg-indigo-100 px-2 py-1 text-base font-semibold text-indigo-800">
-          protailwind-ui-components
-        </code>{' '}
-        package on npm.
+        The following `Button` and `Modal` components are imported from npm ✨
       </p>
       <h2 className="mt-10 text-lg font-medium">Buttons</h2>
       <div className="mt-4 flex gap-4">
