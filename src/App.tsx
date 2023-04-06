@@ -15,10 +15,17 @@ function App() {
   }
 
   return (
-    <div className="mx-auto mt-20 max-w-4xl px-4">
-      <h1 className="text-4xl font-semibold">Vite + React</h1>
-      <p className="mt-2">Click on the Vite and React logos to learn more</p>
-      <div className="mt-6 flex gap-4">
+    <div className="mx-auto mt-20 max-w-2xl px-4">
+      <h1 className="text-xl font-medium">Pro Tailwind UI Components</h1>
+      <p className="mt-2 text-lg/7 text-slate-700">
+        The following `Button` and `Modal` components come from the{' '}
+        <code className="rounded bg-indigo-100 px-2 py-1 text-base font-semibold text-indigo-800">
+          protailwind-ui-components
+        </code>{' '}
+        package on npm.
+      </p>
+      <h2 className="mt-10 text-lg font-medium">Buttons</h2>
+      <div className="mt-4 flex gap-4">
         <Button>I am cool</Button>
         <Button impact="light">I am cool</Button>
         <Button impact="none">I am cool</Button>
@@ -34,43 +41,39 @@ function App() {
         <Button shape="pill">I am cool</Button>
       </div>
 
-      <div className="mt-20"></div>
-
-      <Modal
-        open={isOpen}
-        isLoading={isLoading}
-        slideFrom="top"
-        tone="danger"
-        onClose={() => setIsOpen(false)}
-        onCloseComplete={() => setIsLoading(false)}
-        title="Delete account permantly"
-        actions={{
-          confirm: {
-            label: 'Yes, delete my account!',
-            action: handleConfirm,
-          },
-          cancel: {
-            label: 'Wow no, stop!',
-            action: () => setIsOpen(false),
-          },
-        }}
-      >
-        <div className="mt-4">
-          <p className="text-slate-500">
-            You're about to delete your account permantently. This action cannot be undone. Are you
-            sure you want to do this?
-          </p>
-        </div>
-      </Modal>
-      {/* 
-        ------------------------------
-        Toggle buttons
-        ------------------------------
-      */}
-      <div className="flex gap-2">
+      <h2 className="mt-10 text-lg font-medium">Modal (using Buttons!)</h2>
+      <div className="mt-4">
+        {/* Toggle */}
         <Button tone="danger" impact="light" onClick={() => setIsOpen(true)}>
           Open modal
         </Button>
+        {/* The Modal iself (using Headless UI) */}
+        <Modal
+          open={isOpen}
+          isLoading={isLoading}
+          slideFrom="top"
+          tone="danger"
+          onClose={() => setIsOpen(false)}
+          onCloseComplete={() => setIsLoading(false)}
+          title="Delete account permantly"
+          actions={{
+            confirm: {
+              label: 'Yes, delete my account!',
+              action: handleConfirm,
+            },
+            cancel: {
+              label: 'Wow no, stop!',
+              action: () => setIsOpen(false),
+            },
+          }}
+        >
+          <div className="mt-4">
+            <p className="text-slate-500">
+              You're about to delete your account permantently. This action cannot be undone. Are
+              you sure you want to do this?
+            </p>
+          </div>
+        </Modal>
       </div>
     </div>
   )
