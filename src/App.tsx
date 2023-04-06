@@ -26,19 +26,19 @@ function App() {
       </p>
       <h2 className="mt-10 text-lg font-medium">Buttons</h2>
       <div className="mt-4 flex gap-4">
-        <Button>I am cool</Button>
-        <Button impact="light">I am cool</Button>
-        <Button impact="none">I am cool</Button>
+        <Button>Bold button</Button>
+        <Button impact="light">Light button</Button>
+        <Button impact="none">Ghost button</Button>
       </div>
       <div className="mt-6 flex items-center gap-4">
-        <Button size="large">I am cool</Button>
-        <Button>I am cool</Button>
-        <Button size="small">I am cool</Button>
+        <Button size="large">Large</Button>
+        <Button>Medium</Button>
+        <Button size="small">Small</Button>
       </div>
       <div className="mt-6 flex items-center gap-4">
-        <Button shape="square">I am cool</Button>
-        <Button>I am cool</Button>
-        <Button shape="pill">I am cool</Button>
+        <Button shape="square">Square</Button>
+        <Button>Rounded</Button>
+        <Button shape="pill">Pill shape</Button>
       </div>
 
       <h2 className="mt-10 text-lg font-medium">Modal (using Buttons!)</h2>
