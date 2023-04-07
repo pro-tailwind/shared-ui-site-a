@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "deploy": "vercel build && vercel deploy --prebuilt"
+    "deploy": "vercel pull && vercel build && vercel deploy --prebuilt"
   },
   "dependencies": {
     "@protailwind-ui/yolo": "^0.0.1",
