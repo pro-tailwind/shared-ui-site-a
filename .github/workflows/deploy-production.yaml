@@ -1,0 +1,14 @@
+name: Deploy to Prod
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm install vercel@canary
+      - run: vercel pull --yes
+      - run: vercel build --prod
+      - run: vercel deploy --prebuilt --prod
