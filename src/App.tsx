@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Button, Modal } from '@protailwind-ui/yolo'
+import { Button } from './components/button'
+import { Modal } from './components/modal'
 
 export default function App() {
   const [isOpen, setIsOpen] = React.useState(false)
