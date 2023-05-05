@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { twMerge } from 'tailwind-merge'
 
 import { Button, ButtonProps } from '../button'
-import { cx } from '../../utils'
 
 // ---------------------------------
 // Prop types
@@ -12,7 +12,7 @@ type ModalProps = {
   onCloseComplete?: () => void
   title: string
   open: boolean
-  isLoading?: boolean
+  status?: ButtonProps['status']
   size?: 'small' | 'medium' | 'large'
   tone?: ButtonProps['tone']
   slideFrom?: 'top' | 'right' | 'bottom' | 'left'
@@ -76,12 +76,13 @@ export function Modal({
   title,
   children,
   actions,
-  isLoading = false,
+  status = 'idle',
   size = 'medium',
   tone = 'default',
   slideFrom = 'top',
   ...restProps
 }: ModalProps) {
+  const isLoading = status === 'loading'
   return (
     <Transition.Root show={open} afterLeave={onCloseComplete}>
       <Dialog onClose={isLoading ? () => {} : onClose} className="relative z-10" {...restProps}>
@@ -95,7 +96,7 @@ export function Modal({
           leaveTo="opacity-0"
         >
           <div
-            className={cx('fixed inset-0 bg-opacity-75 transition-opacity', toneClasses[tone])}
+            className={twMerge('fixed inset-0 bg-opacity-75 transition-opacity', toneClasses[tone])}
           ></div>
         </Transition.Child>
 
@@ -103,15 +104,16 @@ export function Modal({
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
             {/* Modal panel */}
             <Transition.Child
+              as={React.Fragment}
               enter="transition ease-out"
-              enterFrom={cx('opacity-0', slideFromClasses[slideFrom].from)}
-              enterTo={cx('opacity-100', slideFromClasses[slideFrom].to)}
+              enterFrom={twMerge('opacity-0', slideFromClasses[slideFrom].from)}
+              enterTo={twMerge('opacity-100', slideFromClasses[slideFrom].to)}
               leave="transition ease-in"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
               <Dialog.Panel
-                className={cx(
+                className={twMerge(
                   'relative w-full overflow-hidden rounded-lg bg-white text-left shadow-xl sm:my-8',
                   sizeClasses[size]
                 )}
@@ -130,11 +132,13 @@ export function Modal({
 
                 {/* Action buttons */}
                 <div className="flex flex-col gap-2 border-t p-4 sm:flex-row-reverse">
-                  <Button disabled={isLoading} tone={tone} onClick={actions.confirm.action}>
-                    <span className="flex items-center justify-center gap-3">
-                      <span>{actions.confirm.label}</span>
-                      {isLoading && <LoadingSpinner />}
-                    </span>
+                  <Button
+                    disabled={isLoading}
+                    tone={tone}
+                    onClick={actions.confirm.action}
+                    status={status}
+                  >
+                    {actions.confirm.label}
                   </Button>
 
                   {/* Only show the cancel button if the action exists */}
@@ -155,41 +159,5 @@ export function Modal({
         </div>
       </Dialog>
     </Transition.Root>
-  )
-}
-
-// ------------------------------
-// Loading spinner
-// ------------------------------
-function LoadingSpinner() {
-  return (
-    <Transition
-      appear
-      show={true}
-      enter="transition ease-out"
-      enterFrom="scale-0"
-      enterTo="scale-100"
-    >
-      <svg
-        className="h-5 w-5 animate-spin text-white"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          className="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          strokeWidth="4"
-        ></circle>
-        <path
-          className="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        ></path>
-      </svg>
-    </Transition>
   )
 }

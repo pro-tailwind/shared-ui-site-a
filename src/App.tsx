@@ -1,16 +1,16 @@
 import React from 'react'
 
-import { Button } from './components/button'
+import { Button, ButtonProps } from './components/button'
 import { Modal } from './components/modal'
 
 export default function App() {
   const [isOpen, setIsOpen] = React.useState(false)
   const [isOpen2, setIsOpen2] = React.useState(false)
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [status, setStatus] = React.useState<ButtonProps['status']>('idle')
   const [activeTheme, setActiveTheme] = React.useState('base')
 
   function handleConfirm() {
-    setIsLoading(true)
+    setStatus('loading')
 
     setTimeout(() => {
       setIsOpen2(false)
@@ -93,10 +93,10 @@ export default function App() {
         <Modal
           open={isOpen2}
           tone="danger"
-          isLoading={isLoading}
+          status={status}
           slideFrom="bottom"
           onClose={() => setIsOpen2(false)}
-          onCloseComplete={() => setIsLoading(false)}
+          onCloseComplete={() => setStatus('idle')}
           title="Delete account permantly"
           actions={{
             confirm: {

@@ -1,12 +1,13 @@
 import type { Config } from 'tailwindcss'
+import multiThemePlugin from './src/plugins/multi-theme'
 
-import { withMultiThemePreset } from '@protailwind-ui/yolo'
+import colorThemes from './src/themes.json'
 
 export default {
-  presets: [withMultiThemePreset satisfies Config],
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
     './node_modules/@protailwind-ui/yolo/dist/**/*.{js,ts,jsx,tsx}',
   ],
+  plugins: [multiThemePlugin({ colorThemes })],
 } satisfies Config
